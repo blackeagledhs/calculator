@@ -1,0 +1,58 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+.calculator {
+    width: 300px;
+    border: 2px solid #333;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+#display {
+    background-color: #222;
+    color: #fff;
+    font-size: 2rem;
+    text-align: right;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+}
+
+button {
+    padding: 20px;
+    font-size: 1.2rem;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+button.operator {
+    background-color: #f0ad4e;
+}
+
+button.equals {
+    background-color: #5cb85c;
+    grid-column: span 2;
+}
+
+button:active {
+    background-color: #ccc;
+}
+
+button.digit.zero {
+    grid-column: span 2; /* Make the "0" button span two columns */
+}
