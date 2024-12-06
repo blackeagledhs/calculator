@@ -1,58 +1,92 @@
+/* General Styling */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #f4f4f4;
+    background: linear-gradient(135deg, #f5f5f5, #e6e6e6);
 }
 
+/* Calculator Wrapper */
 .calculator {
-    width: 300px;
-    border: 2px solid #333;
-    border-radius: 8px;
+    background: #222;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     overflow: hidden;
-    background-color: white;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    width: 360px;
 }
 
+/* Display Section */
 #display {
-    background-color: #222;
+    background: #333;
     color: #fff;
-    font-size: 2rem;
+    font-size: 2.5rem;
     text-align: right;
     padding: 20px;
+    border-bottom: 2px solid #444;
+    min-height: 80px;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
+/* Buttons Section */
 .buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 5px;
-}
-
-button {
+    gap: 10px;
     padding: 20px;
-    font-size: 1.2rem;
-    border: 1px solid #ddd;
-    background-color: #f9f9f9;
+}
+
+/* Buttons */
+button {
+    font-size: 1.5rem;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
+    transition: all 0.2s ease;
+    background: #f1f1f1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-button.operator {
-    background-color: #f0ad4e;
-}
-
-button.equals {
-    background-color: #5cb85c;
-    grid-column: span 2;
+button:hover {
+    background: #e0e0e0;
 }
 
 button:active {
-    background-color: #ccc;
+    transform: scale(0.95);
 }
 
-button.digit.zero {
-    grid-column: span 2; /* Make the "0" button span two columns */
+/* Specific Button Styles */
+button.operator {
+    background: #f9a825;
+    color: white;
+}
+
+button.equals {
+    background: #4caf50;
+    color: white;
+    grid-column: span 1;
+}
+
+button.clear {
+    background: #e57373;
+    color: white;
+}
+
+button.backspace {
+    background: #ffb74d;
+    color: white;
+}
+
+button.zero {
+    grid-column: span 2;
+}
+
+button.decimal {
+    background: #f1f1f1;
 }

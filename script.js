@@ -2,36 +2,48 @@ let currentInput = "0";
 let previousInput = null;
 let operator = null;
 
-// Select display and buttons
+// Elements
 const display = document.getElementById('display');
 const buttons = document.querySelector('.buttons');
 
+// Event Listener
 buttons.addEventListener('click', (e) => {
-    const target = e.target;
-    if (target.tagName !== 'BUTTON') return;
+    const button = e.target;
+    if (!button.matches('button')) return;
 
-    const buttonType = target.classList[0];
-    const buttonValue = target.textContent;
+    const type = button.classList[0];
+    const value = button.textContent;
 
-    if (buttonType === 'digit') {
-        handleDigit(buttonValue);
-    } else if (buttonType === 'operator') {
-        handleOperator(buttonValue);
-    } else if (buttonType === 'equals') {
-        calculate();
-    } else if (buttonType === 'clear') {
-        clearCalculator();
-    } else if (buttonType === 'backspace') {
-        handleBackspace();
-    } else if (buttonType === 'decimal') {
-        handleDecimal();
+    switch (type) {
+        case 'digit':
+            handleDigit(value);
+            break;
+        case 'operator':
+            handleOperator(value);
+            break;
+        case 'equals':
+            calculate();
+            break;
+        case 'clear':
+            clearCalculator();
+            break;
+        case 'backspace':
+            handleBackspace();
+            break;
+        case 'decimal':
+            handleDecimal();
+            break;
     }
-
     updateDisplay();
 });
 
 function handleDigit(value) {
-    currentInput = currentInput === "0" ? value : currentInput + value;
+    // If the current display is "0", replace it with the new digit
+    if (currentInput === "0" && value !== ".") {
+        currentInput = value;
+    } else {
+        currentInput += value;
+    }
 }
 
 function handleOperator(value) {
@@ -40,7 +52,7 @@ function handleOperator(value) {
     }
     operator = value;
     previousInput = currentInput;
-    currentInput = "0";
+    currentInput = "0";  // Allow the user to input the next number
 }
 
 function calculate() {
@@ -48,6 +60,13 @@ function calculate() {
 
     const num1 = parseFloat(previousInput);
     const num2 = parseFloat(currentInput);
+
+    if (operator === "/" && num2 === 0) {
+        currentInput = "Error";
+        previousInput = null;
+        operator = null;
+        return;
+    }
 
     switch (operator) {
         case '+':
@@ -60,7 +79,7 @@ function calculate() {
             currentInput = (num1 * num2).toString();
             break;
         case '/':
-            currentInput = num2 === 0 ? "Error" : (num1 / num2).toString();
+            currentInput = (num1 / num2).toString();
             break;
     }
 
@@ -68,14 +87,14 @@ function calculate() {
     previousInput = null;
 }
 
-function handleBackspace() {
-    currentInput = currentInput.length > 1 ? currentInput.slice(0, -1) : "0";
-}
-
 function handleDecimal() {
     if (!currentInput.includes('.')) {
         currentInput += '.';
     }
+}
+
+function handleBackspace() {
+    currentInput = currentInput.slice(0, -1) || "0";
 }
 
 function clearCalculator() {
